@@ -1,9 +1,72 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "64d8059e-e381-428d-9ef5-7689974485ad",
-  "prevId": "cec1cc2d-0f89-49e1-8cb8-7054c7e2fc74",
+  "id": "c0a058e4-3be8-4c3e-995e-827266218823",
+  "prevId": "d896c70a-63db-42fc-a341-0d9694cebfdf",
   "tables": {
+    "collaborators": {
+      "name": "collaborators",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "workspace_id": {
+          "name": "workspace_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "collaborators_workspace_id_workspaces_id_fk": {
+          "name": "collaborators_workspace_id_workspaces_id_fk",
+          "tableFrom": "collaborators",
+          "tableTo": "workspaces",
+          "columnsFrom": [
+            "workspace_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "collaborators_user_id_users_id_fk": {
+          "name": "collaborators_user_id_users_id_fk",
+          "tableFrom": "collaborators",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "files": {
       "name": "files",
       "schema": "",
@@ -19,7 +82,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "title": {
           "name": "title",
@@ -45,12 +109,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "logo": {
-          "name": "logo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "banner_url": {
           "name": "banner_url",
           "type": "text",
@@ -61,13 +119,13 @@
           "name": "workspace_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "folder_id": {
           "name": "folder_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -117,7 +175,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "title": {
           "name": "title",
@@ -143,12 +202,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "logo": {
-          "name": "logo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
         "banner_url": {
           "name": "banner_url",
           "type": "text",
@@ -159,7 +212,7 @@
           "name": "workspace_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -318,7 +371,8 @@
           "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "now()"
         },
         "workspace_owner": {
           "name": "workspace_owner",

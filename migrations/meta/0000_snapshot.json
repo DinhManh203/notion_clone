@@ -1,10 +1,10 @@
 {
-  "id": "5023ae49-6c38-441b-a156-eedc6c576097",
+  "version": "5",
+  "dialect": "pg",
+  "id": "13b54a97-f449-4e2d-86b2-2d26b881092a",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "7",
-  "dialect": "postgresql",
   "tables": {
-    "public.workspaces": {
+    "workspaces": {
       "name": "workspaces",
       "schema": "",
       "columns": {
@@ -67,21 +67,14 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "uniqueConstraints": {}
     }
   },
   "enums": {},
   "schemas": {},
-  "sequences": {},
-  "roles": {},
-  "policies": {},
-  "views": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
+    "tables": {},
+    "columns": {}
   }
 }

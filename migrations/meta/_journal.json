@@ -1,40 +1,68 @@
 {
-  "version": "7",
-  "dialect": "sqlite",
+  "version": "5",
+  "dialect": "pg",
   "entries": [
     {
       "idx": 0,
-      "version": "7",
-      "when": 1758532304158,
-      "tag": "0000_happy_serpent_society",
+      "version": "5",
+      "when": 1697559176042,
+      "tag": "0000_modern_power_pack",
       "breakpoints": true
     },
     {
       "idx": 1,
-      "version": "7",
-      "when": 1758609969141,
-      "tag": "0001_perpetual_titanium_man",
+      "version": "5",
+      "when": 1697559437655,
+      "tag": "0001_numerous_killmonger",
       "breakpoints": true
     },
     {
       "idx": 2,
-      "version": "7",
-      "when": 1758611816661,
-      "tag": "0002_illegal_logan",
+      "version": "5",
+      "when": 1697563580782,
+      "tag": "0002_small_solo",
       "breakpoints": true
     },
     {
       "idx": 3,
-      "version": "7",
-      "when": 1758611919624,
-      "tag": "0003_misty_dust",
+      "version": "5",
+      "when": 1697666874633,
+      "tag": "0003_adorable_alex_wilder",
       "breakpoints": true
     },
     {
       "idx": 4,
-      "version": "7",
-      "when": 1758615759363,
-      "tag": "0004_stormy_logan",
+      "version": "5",
+      "when": 1697725821427,
+      "tag": "0004_parched_malcolm_colcord",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1697728263735,
+      "tag": "0005_eager_banshee",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1697749458086,
+      "tag": "0006_chemical_wendell_vaughn",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1698161613748,
+      "tag": "0007_bent_vindicator",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1698171444744,
+      "tag": "0008_tranquil_franklin_storm",
       "breakpoints": true
     }
   ]

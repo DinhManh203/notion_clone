@@ -1,10 +1,73 @@
 {
-  "id": "5d421a4d-7848-42b4-a1b6-e1da689e15e3",
-  "prevId": "a5c180f3-7f67-4572-b63c-1ae5f4be3e64",
-  "version": "7",
-  "dialect": "postgresql",
+  "version": "5",
+  "dialect": "pg",
+  "id": "9cd1faa9-ee4c-48a7-b5ab-7a0384f80b74",
+  "prevId": "6e08bab1-5366-455a-9ab5-aff713371ab5",
   "tables": {
-    "public.files": {
+    "collaborators": {
+      "name": "collaborators",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "workspace_id": {
+          "name": "workspace_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "collaborators_workspace_id_workspaces_id_fk": {
+          "name": "collaborators_workspace_id_workspaces_id_fk",
+          "tableFrom": "collaborators",
+          "tableTo": "workspaces",
+          "columnsFrom": [
+            "workspace_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "collaborators_user_id_users_id_fk": {
+          "name": "collaborators_user_id_users_id_fk",
+          "tableFrom": "collaborators",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "files": {
       "name": "files",
       "schema": "",
       "columns": {
@@ -100,12 +163,9 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "uniqueConstraints": {}
     },
-    "public.folders": {
+    "folders": {
       "name": "folders",
       "schema": "",
       "columns": {
@@ -182,12 +242,9 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "uniqueConstraints": {}
     },
-    "public.subscriptions": {
+    "subscriptions": {
       "name": "subscriptions",
       "schema": "",
       "columns": {
@@ -206,7 +263,6 @@
         "status": {
           "name": "status",
           "type": "subscription_status",
-          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -239,56 +295,56 @@
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "current_period_start": {
           "name": "current_period_start",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "current_period_end": {
           "name": "current_period_end",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "ended_at": {
           "name": "ended_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "cancel_at": {
           "name": "cancel_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "canceled_at": {
           "name": "canceled_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "trial_start": {
           "name": "trial_start",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         },
         "trial_end": {
           "name": "trial_end",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
-          "default": "timezone('utc'::text, now())"
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -305,51 +361,12 @@
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
-        },
-        "subscriptions_price_id_fkey": {
-          "name": "subscriptions_price_id_fkey",
-          "tableFrom": "subscriptions",
-          "tableTo": "prices",
-          "columnsFrom": [
-            "price_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "subscriptions_user_id_fkey": {
-          "name": "subscriptions_user_id_fkey",
-          "tableFrom": "subscriptions",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {
-        "Can only view own subs data.": {
-          "name": "Can only view own subs data.",
-          "as": "PERMISSIVE",
-          "for": "SELECT",
-          "to": [
-            "public"
-          ],
-          "using": "(( SELECT auth.uid() AS uid) = user_id)"
-        }
-      },
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "uniqueConstraints": {}
     },
-    "public.workspaces": {
+    "workspaces": {
       "name": "workspaces",
       "schema": "",
       "columns": {
@@ -412,21 +429,14 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "uniqueConstraints": {}
     }
   },
   "enums": {},
   "schemas": {},
-  "sequences": {},
-  "roles": {},
-  "policies": {},
-  "views": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
+    "tables": {},
+    "columns": {}
   }
 }
